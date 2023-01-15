@@ -4,9 +4,9 @@ body {
     padding: 25px;
     display: flex;
     margin: auto;
-    width: 30%;
+    width: 25%;
 
-    background-color:#b1d5f2;
+    background-color:#bbdcfa;
   }
   
 #root {
@@ -28,9 +28,13 @@ textarea {
     flex: 1;
     resize: none;
     border-radius: 5px;
-    border: 1px solid black;
+    border: 2px solid #2595d1;
     padding: 10px;
     margin-bottom: 10px;
+  }
+
+  input:focus, textarea:focus {
+    outline: none;
   }
   
 .tweet-box-actions {
@@ -58,7 +62,7 @@ textarea {
 }
   
 .tweet {
-    border: 1px solid black;
+    border: 2px solid #2595d1;
     padding: 10px;
     border-radius: 5px;
     margin: 10px 0;
