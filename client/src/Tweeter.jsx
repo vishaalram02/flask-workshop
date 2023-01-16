@@ -12,6 +12,22 @@ export default class App extends React.Component {
     };
   }
 
+  componentDidMount(){
+    fetch('/api/messages').then(res => {
+      return res.json();
+    }).then(data => {
+      var newTweets = [];
+
+      for(var i=0;i<Object.keys(data).length;i++){
+        newTweets.push(data[i]);
+      }
+
+      this.setState((prevState) => ({
+        tweets: newTweets
+      }))
+    });
+  }
+
   handleAuthorChange = (event) => {
     this.setState({ author: event.target.value });
   };
@@ -21,6 +37,12 @@ export default class App extends React.Component {
   };
 
   handleSubmit = () => {
+    fetch('/api/add', { 
+      method: 'POST', 
+      headers: { 'Content-Type': 'application/json' }, 
+      body: JSON.stringify({author: this.state.author, text: this.state.tweet})
+    })
+
     this.setState((prevState) => ({
       tweets: [
         ...prevState.tweets,
@@ -32,6 +54,15 @@ export default class App extends React.Component {
       tweet: ""
     }));
   };
+
+  handleDelete = (idx) => {
+    fetch('/api/delete/' + idx, {
+      method: 'DELETE',
+    })
+    this.setState((prevState) => ({
+      tweets: prevState.tweets.filter((twt, i) => i != idx)
+    }));
+  }
 
   render() {
     const author = this.state.author;
@@ -69,9 +100,12 @@ export default class App extends React.Component {
         </div>
         <div className="tweets">
           {tweets.length > 0
-            ? tweets.map((tweet) => (
-                <div className="tweet">
-                  <h4>{tweet.author}</h4>
+            ? tweets.map((tweet, idx) => (
+                <div className="tweet" key={"tweet" + idx}>
+                  <div className="tweet-top">
+                    <h4>{tweet.author}</h4>
+                    <button className="delete-button" key={"button" + idx} onClick = {() => this.handleDelete(idx)}>🗑️</button>
+                  </div>
                   <p>{tweet.text}</p>
                 </div>
               ))
