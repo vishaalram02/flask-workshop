@@ -33,6 +33,12 @@ export default class App extends React.Component {
     }));
   };
 
+  handleDelete = (idx) => {
+    this.setState((prevState) => ({
+      tweets: prevState.tweets.filter((twt, i) => i != idx)
+    }));
+  }
+
   render() {
     const author = this.state.author;
     const tweet = this.state.tweet;
@@ -69,9 +75,12 @@ export default class App extends React.Component {
         </div>
         <div className="tweets">
           {tweets.length > 0
-            ? tweets.map((tweet) => (
-                <div className="tweet">
-                  <h4>{tweet.author}</h4>
+            ? tweets.map((tweet, idx) => (
+                <div className="tweet" key={"tweet" + idx}>
+                  <div className="tweet-top">
+                    <h4>{tweet.author}</h4>
+                    <button className="delete-button" key={"button" + idx} onClick = {() => this.handleDelete(idx)}>🗑️</button>
+                  </div>
                   <p>{tweet.text}</p>
                 </div>
               ))
