@@ -40,27 +40,32 @@ export default class App extends React.Component {
     fetch('/api/add', { 
       method: 'POST', 
       headers: { 'Content-Type': 'application/json' }, 
-      body: JSON.stringify({author: this.state.author, text: this.state.tweet})
+      body: JSON.stringify({author: this.state.author, tweet: this.state.tweet})
+    }).then(res => {
+      return res.json();
+    }).then(data => {
+      console.log(data);
+      var tweetId = data.id;
+      this.setState((prevState) => ({
+        tweets: [
+          ...prevState.tweets,
+          {
+            id: tweetId,
+            author: prevState.author,
+            tweet: prevState.tweet
+          }
+        ],
+        tweet: ""
+      }));
     })
-
-    this.setState((prevState) => ({
-      tweets: [
-        ...prevState.tweets,
-        {
-          author: prevState.author,
-          text: prevState.tweet
-        }
-      ],
-      tweet: ""
-    }));
   };
 
-  handleDelete = (idx) => {
-    fetch('/api/delete/' + idx, {
+  handleDelete = (id) => {
+    fetch('/api/delete/' + id, {
       method: 'DELETE',
     })
     this.setState((prevState) => ({
-      tweets: prevState.tweets.filter((twt, i) => i != idx)
+      tweets: prevState.tweets.filter((twt) => twt.id != id)
     }));
   }
 
@@ -104,9 +109,9 @@ export default class App extends React.Component {
                 <div className="tweet" key={"tweet" + idx}>
                   <div className="tweet-top">
                     <h4>{tweet.author}</h4>
-                    <button className="delete-button" key={"button" + idx} onClick = {() => this.handleDelete(idx)}>🗑️</button>
+                    <button className="delete-button" key={"button" + idx} onClick = {() => this.handleDelete(tweet.id)}>🗑️</button>
                   </div>
-                  <p>{tweet.text}</p>
+                  <p>{tweet.tweet}</p>
                 </div>
               ))
             : "Be the first to tweet..."}
