@@ -26,7 +26,7 @@ export default class App extends React.Component {
         ...prevState.tweets,
         {
           author: prevState.author,
-          text: prevState.tweet
+          tweet: prevState.tweet
         }
       ],
       tweet: ""
@@ -81,7 +81,7 @@ export default class App extends React.Component {
                     <h4>{tweet.author}</h4>
                     <button className="delete-button" key={"button" + idx} onClick = {() => this.handleDelete(idx)}>🗑️</button>
                   </div>
-                  <p>{tweet.text}</p>
+                  <p>{tweet.tweet}</p>
                 </div>
               ))
             : "Be the first to tweet..."}
