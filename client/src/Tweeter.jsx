@@ -40,7 +40,7 @@ export default class App extends React.Component {
     fetch('/api/add', { 
       method: 'POST', 
       headers: { 'Content-Type': 'application/json' }, 
-      body: JSON.stringify({author: this.state.author, text: this.state.tweet})
+      body: JSON.stringify({author: this.state.author, tweet: this.state.tweet})
     })
 
     this.setState((prevState) => ({
@@ -48,7 +48,7 @@ export default class App extends React.Component {
         ...prevState.tweets,
         {
           author: prevState.author,
-          text: prevState.tweet
+          tweet: prevState.tweet
         }
       ],
       tweet: ""
@@ -106,7 +106,7 @@ export default class App extends React.Component {
                     <h4>{tweet.author}</h4>
                     <button className="delete-button" key={"button" + idx} onClick = {() => this.handleDelete(idx)}>🗑️</button>
                   </div>
-                  <p>{tweet.text}</p>
+                  <p>{tweet.tweet}</p>
                 </div>
               ))
             : "Be the first to tweet..."}

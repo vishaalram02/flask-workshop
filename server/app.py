@@ -2,7 +2,7 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-messages = []
+tweets = []
 
 @app.route('/')
 def hello():
@@ -10,18 +10,18 @@ def hello():
 
 @app.route('/messages', methods = ['GET'])
 def getMessages():
-    return jsonify(messages)
+    return jsonify(tweets)
 
 @app.route('/add', methods = ['POST'])
 def addMessage():
     data = request.get_json()
-    messages.append(data)
-    return jsonify(messages)
+    tweets.append(data)
+    return jsonify(tweets)
 
 @app.route('/delete/<idx>', methods = ['DELETE'])
 def deleteMessage(idx):
-    messages.pop(int(idx))
-    return jsonify(messages)
+    tweets.pop(int(idx))
+    return jsonify(tweets)
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
