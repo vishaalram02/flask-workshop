@@ -29,6 +29,7 @@ yarn run dev
 ### Server
 First create a virtual environment, install dependencies, and start the server with 
 ```bash
+cd server
 python3 -m venv env
 source env/bin/activate
 pip3 install -r requirements.txt
