@@ -16,9 +16,9 @@ The table describes the content of each step:
 |`step-4` | database integration |
 
 ## Installations and Startup
-This project was created with node version `14.18.1`.
 
 ### Client
+Note this project was created with node version `14.18.1`.
 To install client dependencies and start client, run in a separate terminal
 ```bash
 cd client
