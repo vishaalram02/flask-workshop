@@ -19,7 +19,7 @@ The table describes the content of each step:
 
 ### Client
 Note this project was created with node version `14.18.1`.
-To install client dependencies and start client, run in a separate terminal
+To install client dependencies and start client, run
 ```bash
 cd client
 yarn install
