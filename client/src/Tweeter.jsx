@@ -44,7 +44,6 @@ export default class App extends React.Component {
     }).then(res => {
       return res.json();
     }).then(data => {
-      console.log(data);
       var tweetId = data.id;
       this.setState((prevState) => ({
         tweets: [
