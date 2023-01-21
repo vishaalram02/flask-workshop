@@ -44,7 +44,7 @@ def addMessage():
     tweet = Tweet(data['author'], data['tweet'])
     db.session.add(tweet)
     db.session.commit()
-    return tweet.map()
+    return jsonify(tweet.map())
 
 @app.route('/delete/<id>', methods = ['DELETE'])
 def deleteMessage(id):
